@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CourseContext } from './CourseContext';
 
 export default function SchoolCatalog() {
   const [courses, setCourses] = useState([]);
@@ -12,6 +13,8 @@ export default function SchoolCatalog() {
   // Add pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5;
+
+  const { enrollCourse } = useContext(CourseContext); 
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -160,7 +163,7 @@ export default function SchoolCatalog() {
                 <td>{course.semesterCredits}</td>
                 <td>{course.clockHours}</td>
                 <td>
-                  <button>Enroll</button>
+                  <button onClick={() => enrollCourse(course)}>Enroll</button> 
                 </td>
               </tr>
             ))
